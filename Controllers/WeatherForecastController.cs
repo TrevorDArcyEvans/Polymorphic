@@ -1,10 +1,10 @@
-using Microsoft.AspNetCore.Mvc;
-
 namespace Polymorphic.Controllers;
+
+using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+public sealed class WeatherForecastController : ControllerBase
 {
   private static readonly string[] Summaries = new[]
   {
@@ -31,5 +31,11 @@ public class WeatherForecastController : ControllerBase
         UV = Random.Shared.Next(0, 10),
       })
       .ToArray();
+  }
+
+  [HttpPost]
+  public void Add([FromBody] WeatherForecast item)
+  {
+    
   }
 }
