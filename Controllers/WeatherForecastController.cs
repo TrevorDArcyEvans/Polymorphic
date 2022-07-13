@@ -21,16 +21,38 @@ public sealed class WeatherForecastController : ControllerBase
   [HttpGet]
   public ActionResult<IEnumerable<WeatherForecast>> Get()
   {
-    return Enumerable.Range(1, 5).Select(index => new WeatherForecastEx
+    return new WeatherForecast[]
+    {
+      new WeatherForecastRH
       {
-        Date = DateTime.Now.AddDays(index),
+        Date = DateTime.UtcNow.AddDays(1),
         TemperatureC = Random.Shared.Next(-20, 55),
         Summary = Summaries[Random.Shared.Next(Summaries.Length)],
-        
-        RelativeHumidity = Random.Shared.Next(0, 100),
-        UV = Random.Shared.Next(0, 10),
-      })
-      .ToArray();
+        RelativeHumidity = Random.Shared.Next(0, 100)
+      },
+      new WeatherForecastPollen
+      {
+        Date = DateTime.UtcNow.AddDays(1),
+        TemperatureC = Random.Shared.Next(-20, 55),
+        Summary = Summaries[Random.Shared.Next(Summaries.Length)],
+        Count = Random.Shared.Next(0, 100)
+      },
+      new WeatherForecastUV
+      {
+        Date = DateTime.UtcNow.AddDays(1),
+        TemperatureC = Random.Shared.Next(-20, 55),
+        Summary = Summaries[Random.Shared.Next(Summaries.Length)],
+        UV = Random.Shared.Next(0, 100)
+      },
+      new WeatherForecastWind()
+      {
+        Date = DateTime.UtcNow.AddDays(1),
+        TemperatureC = Random.Shared.Next(-20, 55),
+        Summary = Summaries[Random.Shared.Next(Summaries.Length)],
+        Speed = Random.Shared.Next(0, 100),
+        Direction = Random.Shared.Next(0, 360)
+      }
+    };
   }
 
   [HttpPost]
