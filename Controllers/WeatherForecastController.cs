@@ -1,3 +1,5 @@
+using Polymorphic.Models;
+
 namespace Polymorphic.Controllers;
 
 using Microsoft.AspNetCore.Mvc;

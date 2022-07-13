@@ -1,4 +1,4 @@
-namespace Polymorphic;
+namespace Polymorphic.Models;
 
 public sealed class WeatherForecastPollen : WeatherForecast
 {

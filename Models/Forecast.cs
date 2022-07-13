@@ -1,4 +1,4 @@
-﻿namespace Polymorphic;
+﻿namespace Polymorphic.Models;
 
 public abstract class Forecast
 {

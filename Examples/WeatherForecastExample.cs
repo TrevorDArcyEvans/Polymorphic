@@ -1,3 +1,5 @@
+using Polymorphic.Models;
+
 namespace Polymorphic.Examples;
 
 using Swashbuckle.AspNetCore.Filters;
