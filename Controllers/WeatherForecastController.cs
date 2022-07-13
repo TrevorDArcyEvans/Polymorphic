@@ -19,7 +19,7 @@ public sealed class WeatherForecastController : ControllerBase
   }
 
   [HttpGet]
-  public IEnumerable<WeatherForecast> Get()
+  public ActionResult<IEnumerable<WeatherForecast>> Get()
   {
     return Enumerable.Range(1, 5).Select(index => new WeatherForecastEx
       {
@@ -34,8 +34,8 @@ public sealed class WeatherForecastController : ControllerBase
   }
 
   [HttpPost]
-  public void Add([FromBody] WeatherForecast item)
+  public ActionResult Add([FromBody] WeatherForecast item)
   {
-    
+    return Ok($"Deserialised {item.GetType().FullName}");
   }
 }
