@@ -9,19 +9,26 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 [TestFixture]
 public sealed class WeatherForecastConverter_Tests
 {
+  private readonly JsonSerializerSettings _NS_settings = new JsonSerializerSettings()
+  {
+    Formatting = Formatting.Indented,
+    TypeNameHandling = TypeNameHandling.All
+  };
+
+  private readonly JsonSerializerOptions _STJ_options = new JsonSerializerOptions
+  {
+    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+    WriteIndented = true,
+    Converters = { new WeatherForecastConverter() }
+  };
+
   [Test]
   public void RoundTrip_Succeeds()
   {
     var data = CreateData();
-    var options = new JsonSerializerOptions
-    {
-      PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-      WriteIndented = true,
-      Converters = { new WeatherForecastConverter() }
-    };
-    var json = JsonSerializer.Serialize(data, options);
+    var json = JsonSerializer.Serialize(data, _STJ_options);
 
-    var instance = JsonSerializer.Deserialize<WeatherForecast>(json, options);
+    var instance = JsonSerializer.Deserialize<WeatherForecast>(json, _STJ_options);
 
     data.Should().BeEquivalentTo(instance);
   }
@@ -30,20 +37,9 @@ public sealed class WeatherForecastConverter_Tests
   public void Serialise_Compatible_With_Newtonsoft()
   {
     var data = CreateData();
-    var options = new JsonSerializerOptions
-    {
-      PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-      WriteIndented = true,
-      Converters = { new WeatherForecastConverter() }
-    };
-    var json = JsonSerializer.Serialize(data, options);
+    var json = JsonSerializer.Serialize(data, _STJ_options);
 
-    var settings = new JsonSerializerSettings()
-    {
-      Formatting = Formatting.Indented,
-      TypeNameHandling = TypeNameHandling.All
-    };
-    var instance = JsonConvert.DeserializeObject<WeatherForecast>(json, settings);
+    var instance = JsonConvert.DeserializeObject<WeatherForecast>(json, _NS_settings);
 
     data.Should().BeEquivalentTo(instance);
   }
@@ -52,20 +48,9 @@ public sealed class WeatherForecastConverter_Tests
   public void Deserialise_Compatible_With_Newtonsoft()
   {
     var data = CreateData();
-    var settings = new JsonSerializerSettings()
-    {
-      Formatting = Formatting.Indented,
-      TypeNameHandling = TypeNameHandling.All
-    };
-    var json = JsonConvert.SerializeObject(data, settings);
+    var json = JsonConvert.SerializeObject(data, _NS_settings);
 
-    var options = new JsonSerializerOptions
-    {
-      PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-      WriteIndented = true,
-      Converters = { new WeatherForecastConverter() }
-    };
-    var instance = JsonSerializer.Deserialize<WeatherForecast>(json, options);
+    var instance = JsonSerializer.Deserialize<WeatherForecast>(json, _STJ_options);
 
     data.Should().BeEquivalentTo(instance);
   }
