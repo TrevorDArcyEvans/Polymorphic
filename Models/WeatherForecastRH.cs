@@ -1,4 +1,4 @@
-namespace Polymorphic.Models;
+namespace Polymorphic.Server.Models;
 
 public sealed class WeatherForecastRH : WeatherForecast
 {

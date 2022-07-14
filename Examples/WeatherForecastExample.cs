@@ -1,6 +1,6 @@
-using Polymorphic.Models;
+using Polymorphic.Server.Models;
 
-namespace Polymorphic.Examples;
+namespace Polymorphic.Server.Examples;
 
 using Swashbuckle.AspNetCore.Filters;
 

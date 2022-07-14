@@ -1,6 +1,6 @@
-using Polymorphic.Models;
+using Polymorphic.Server.Models;
 
-namespace Polymorphic.Controllers;
+namespace Polymorphic.Server.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
 
