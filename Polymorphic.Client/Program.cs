@@ -38,10 +38,17 @@ var data = new WeatherForecastRH
   Console.WriteLine($"Newtonsoft.Json:");
   Console.WriteLine($"{json}");
 
-  var content = new StringContent(json, Encoding.UTF8, "application/json");
-  var resp = await client.PostAsync(WeatherForecastUri, content);
-  var msg = await resp.Content.ReadAsStringAsync();
-  Console.WriteLine($"{msg}");
+  try
+  {
+    var content = new StringContent(json, Encoding.UTF8, "application/json");
+    var resp = await client.PostAsync(WeatherForecastUri, content);
+    var msg = await resp.Content.ReadAsStringAsync();
+    Console.WriteLine($"{msg}");
+  }
+  catch (Exception ex)
+  {
+    Console.WriteLine($"Ex: {ex.Message}");
+  }
 }
 
 #endregion
@@ -61,10 +68,17 @@ Console.WriteLine();
   Console.WriteLine($"System.Text.Json:");
   Console.WriteLine($"{json}");
 
-  var content = new StringContent(json, Encoding.UTF8, "application/json");
-  var resp = await client.PostAsync(WeatherForecastUri, content);
-  var msg = await resp.Content.ReadAsStringAsync();
-  Console.WriteLine($"{msg}");
+  try
+  {
+    var content = new StringContent(json, Encoding.UTF8, "application/json");
+    var resp = await client.PostAsync(WeatherForecastUri, content);
+    var msg = await resp.Content.ReadAsStringAsync();
+    Console.WriteLine($"{msg}");
+  }
+  catch (Exception ex)
+  {
+    Console.WriteLine($"Ex: {ex.Message}");
+  }
 }
 
 #endregion
