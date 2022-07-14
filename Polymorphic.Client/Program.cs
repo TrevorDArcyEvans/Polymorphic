@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using System.Text.Json;
 using Newtonsoft.Json;
+using Polymorphic.Converters;
 using Polymorphic.Models;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
@@ -61,9 +62,12 @@ Console.WriteLine();
   var options = new JsonSerializerOptions
   {
     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-    WriteIndented = true
+    WriteIndented = true,
+    Converters = { new WeatherForecastConverter() }
   };
   var json = JsonSerializer.Serialize(data, options);
+
+  var instance = JsonSerializer.Deserialize<WeatherForecast>(json, options);
 
   Console.WriteLine($"System.Text.Json:");
   Console.WriteLine($"{json}");
