@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polymorphic.Client", "Polym
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polymorphic.Converters", "Polymorphic.Converters\Polymorphic.Converters.csproj", "{59115D20-6173-4E14-A78B-D7B3A1BF6A24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polymorphic.Converters.Tests", "Polymorphic.Converters.Tests\Polymorphic.Converters.Tests.csproj", "{13192F5A-E4C6-4B92-8E5F-89A860E0F5CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{59115D20-6173-4E14-A78B-D7B3A1BF6A24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59115D20-6173-4E14-A78B-D7B3A1BF6A24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59115D20-6173-4E14-A78B-D7B3A1BF6A24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13192F5A-E4C6-4B92-8E5F-89A860E0F5CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13192F5A-E4C6-4B92-8E5F-89A860E0F5CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13192F5A-E4C6-4B92-8E5F-89A860E0F5CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13192F5A-E4C6-4B92-8E5F-89A860E0F5CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
