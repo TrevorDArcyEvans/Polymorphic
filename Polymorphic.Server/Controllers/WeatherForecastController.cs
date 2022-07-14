@@ -1,4 +1,4 @@
-using Polymorphic.Server.Models;
+using Polymorphic.Models;
 
 namespace Polymorphic.Server.Controllers;
 
