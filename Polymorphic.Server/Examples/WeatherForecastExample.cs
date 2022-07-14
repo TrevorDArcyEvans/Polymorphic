@@ -1,7 +1,6 @@
-using Polymorphic.Models;
-
 namespace Polymorphic.Server.Examples;
 
+using Polymorphic.Models;
 using Swashbuckle.AspNetCore.Filters;
 
 public class WeatherForecastExample : IExamplesProvider<WeatherForecast>

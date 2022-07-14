@@ -1,8 +1,7 @@
-using Polymorphic.Models;
-
+using Microsoft.AspNetCore.Mvc;
 namespace Polymorphic.Server.Controllers;
 
-using Microsoft.AspNetCore.Mvc;
+using Polymorphic.Models;
 
 [ApiController]
 [Route("[controller]")]
