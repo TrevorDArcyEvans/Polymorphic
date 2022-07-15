@@ -1,16 +1,19 @@
 # Polymorphic JSON Marshalling
 **TL;DR** `System.Text.Json` is broken, use `Newtonsoft.Json`
 
+## Background
+<details>
+
+The object model is a variation on the standard `WeatherForecast` which is part of the standard
+Microsoft .NET Core project template.
+
 ```mermaid
 classDiagram
 
-class Forecast {
+class WeatherForecast {
   +DateTime Date
   +string? Summary
   +Forecast? Previous
-}
-
-class WeatherForecast {
   +int TemperatureC
   +int TemperatureF
 }
@@ -32,9 +35,8 @@ class WeatherForecastWind {
   +int Direction
 }
 
-Forecast "1" --> "0..1" Forecast
+WeatherForecast "1" --> "0..1" WeatherForecast
 
-Forecast <|-- WeatherForecast
 WeatherForecast <|-- WeatherForecastPollen
 WeatherForecast <|-- WeatherForecastRH
 WeatherForecast <|-- WeatherForecastUV
@@ -42,12 +44,12 @@ WeatherForecast <|-- WeatherForecastWind
 
 ```
 
-```mermaid
+The most important difference is the addition of a reference to a previous `WeatherForecast`.
 
-flowchart LR
-  client[client/STJ] -- WeatherForecast <--> server[server/Newtonsoft]
+</details>
 
-```
+## Default JSON serialisation
+<details>
 
 Newtonsoft.Json:
 ```json
@@ -87,6 +89,62 @@ System.Text.Json:
 
 ```
 
+Points to note:
+* `Newtonsoft.Json`
+  * stores the type in a `$type` metadata tag
+  * has correctly serialised top level `WeatherForecast`
+  * has correctly serialised reference to previous `WeatherForecast`
+* `System.Text.Json`
+  * does **not** have any type information
+  * has **not** correctly serialised reference to top level `WeatherForecast`
+  * has **not** correctly serialised reference to previous `WeatherForecast`
+
+</details>
+
+## Problem
+<details>
+
+```mermaid
+
+flowchart LR
+  client[client/STJ] -- WeatherForecast <--> server[server/Newtonsoft]
+
+```
+
+When two parties need to send a `WeatherForecast` to each other via JSON, then
+both parties need to use `Newtonsoft.Json` otherwise [object slicing](https://en.wikipedia.org/wiki/Object_slicing)
+will happen.
+
+In the above scenario, one party is using `System.Text.Json`, so will only
+be able to send/receive the base `WeatherForecast`.
+
+</details>
+
+## Solution
+<details>
+
+  **This section has been intentionally left blank.**
+
+Seriously, there *are* solutions by writing custom converters working in concert with
+type discriminators but these get very complicated, very quickly.
+
+</details>
+
+## Conclusion
+<details>
+
+`System.Text.Json` has been designed for speed and it is definitely faster than `Newtonsoft.Json`.
+However, in doing so, it has sacrificed completeness; and polymorphic marshalling is just one such area.
+
+At this stage, a hybrid approach is recommended.  Use `Newtonsoft.Json` in the first instance;
+profile your code; and use `System.Text.Json` for those sections where JSON manipulation is the
+bottleneck.
+
+</details>
+
+## Further information
+<details>
+
 `System.Text.Json` does not support polymorphic marshalling (serialisation + deserialisation): 
 * [How to serialize properties of derived classes with System.Text.Json](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-polymorphism)
 * [Support polymorphic deserialization](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-converters-how-to?pivots=dotnet-6-0#support-polymorphic-deserialization)
@@ -102,4 +160,6 @@ Whereas `Newtonsoft.Json` supports this via `TypeNameHandling.All`, though at th
 
 There are some incomplete workarounds:
 * [Polymorphic Deserialization With System.Text.Json in .NET 5.0](https://badecho.com/index.php/2020/12/04/polymorphic-json-deserialization/)
+
+</details>
 
