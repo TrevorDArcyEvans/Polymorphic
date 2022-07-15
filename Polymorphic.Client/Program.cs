@@ -88,6 +88,8 @@ Console.WriteLine();
 #endregion
 
 /*
+Default serialisation & results:
+
 
 Newtonsoft.Json:
 {
@@ -125,11 +127,5 @@ System.Text.Json:
 {"$type":"Microsoft.AspNetCore.Mvc.NewtonsoftJson.ValidationProblemDetailsConverter+AnnotatedValidationProblemDetails, Microsoft.AspNetCore.Mvc.NewtonsoftJson","errors":{"$type":"System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.String[], System.Private.CoreLib]], System
 .Private.CoreLib","item":{"$type":"System.String[], System.Private.CoreLib","$values":["The item field is required."]},"relativeHumidity":{"$type":"System.String[], System.Private.CoreLib","$values":["Could not create an instance of type Polymorphic.Models.WeatherForecast. Type is an interface or abstract cl
 ass and cannot be instantiated. Path 'relativeHumidity', line 2, position 21."]}},"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"00-7f442902f2adb894dedcd32c2476c3f2-be20a1f2f2bb9dc5-00"}
-
-
-
-System.Text.Json does not support polymorphic marshalling (serialisation + deserialisation): 
-  https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-polymorphism
-  https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-converters-how-to?pivots=dotnet-6-0#support-polymorphic-deserialization
 
 */
