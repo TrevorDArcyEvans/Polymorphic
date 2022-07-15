@@ -163,3 +163,13 @@ There are some incomplete workarounds:
 
 </details>
 
+## Further work
+<details>
+
+The current 'solution' is to use `Newtonsoft.Json` under the covers to do marshalling for
+`System.Text.Json`.  This is far from ideal and is just using `Newtonsoft.Json` by proxy.
+However, there are unit tests provided in the hope that a proper solution, based on
+`System.Text.Json`, can be developed.
+
+</details>
+
