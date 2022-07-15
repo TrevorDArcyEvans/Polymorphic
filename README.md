@@ -13,7 +13,7 @@ classDiagram
 class WeatherForecast {
   +DateTime Date
   +string? Summary
-  +Forecast? Previous
+  +WeatherForecast? Previous
   +int TemperatureC
   +int TemperatureF
 }
